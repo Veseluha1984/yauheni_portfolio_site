@@ -69,18 +69,11 @@
       <a class="chip" target="_blank" href="https://www.linkedin.com/in/yauheni-vesialukha-19162b239" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
     </div>
   </div>
-<div class="cv-dropdown">
-  <button class="btn primary" id="cvToggle">
-    <i class="fa-solid fa-file-arrow-down"></i> Lebenslauf herunterladen ▾
-  </button>
-  <div class="cv-menu" id="cvMenu">
-    <a href="files/Yauheni_Vesialukha_Data_Analyst_Tipps_von_Vanessa.pdf" download data-lang="Deutsch">🇩🇪 Deutsch</a>
-    <a href="files/Yauheni_Vesialukha_Data_Analyst_en.pdf" download data-lang="English">🇬🇧 English</a>
-  </div>
-</div>
+  <a class="btn primary cv-download-button" href="files/Yauheni Vesialukha Data Analyst.pdf" download>
+    <i class="fa-solid fa-file-arrow-down"></i> Lebenslauf herunterladen
+  </a>
 </header>
-
-<section id="skills">
+  <section id="skills">
   <h2>Kernkompetenzen</h2>
   <div class="skills">
 
@@ -309,7 +302,7 @@
   </div>
 
   <div class="experience-item important">
-    <h3>Regionaler Sicherheitsmanager — DIYESA GmbH (UA)</h3>
+    <h3>Regionaler Manager für Risiko- und Prozessmanagement — DIYESA GmbH (UA)</h3>
     <p>11.2019–06.2022 • Einzelhandel mit Elektronik (300 Mitarbeitende)</p>
     <ul>
       <li>Optimierung von Geschäftsprozessen in Logistik, Sicherheit und Inventur.</li>
@@ -575,18 +568,26 @@ document.getElementById('scrollToTopBtn').onclick = function() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
- const cvToggle = document.getElementById("cvToggle");
+  const cvToggle = document.getElementById("cvToggle");
   const cvMenu = document.getElementById("cvMenu");
 
-  cvToggle.addEventListener("click", () => {
-    cvMenu.classList.toggle("show");
-  });
+  // Защитные проверки: только если элементы существуют
+  if (cvToggle && cvMenu) {
+    cvToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      cvMenu.classList.toggle("show");
+      // Обновляем aria-hidden для доступности
+      const isShown = cvMenu.classList.contains('show');
+      cvMenu.setAttribute('aria-hidden', (!isShown).toString());
+    });
 
-  document.addEventListener("click", (e) => {
-    if (!cvToggle.contains(e.target) && !cvMenu.contains(e.target)) {
-      cvMenu.classList.remove("show");
-    }
-  });
+    document.addEventListener("click", (e) => {
+      if (!cvToggle.contains(e.target) && !cvMenu.contains(e.target)) {
+        cvMenu.classList.remove("show");
+        cvMenu.setAttribute('aria-hidden', 'true');
+      }
+    });
+  }
 
   // Отслеживание кликов по ссылкам CV для GA4
   document.addEventListener("DOMContentLoaded", function () {
