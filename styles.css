@@ -133,7 +133,31 @@ a:hover {
   border: none;
 }
 
+.cv-dropdown {
+  position: relative;
+  display: inline-block;
+}
 
+.cv-download-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(90deg, #4cc9f0, #4895ef);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 12px 22px;
+  border-radius: 10px;
+  transition: all 0.25s ease;
+  border: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+.cv-download-button:hover {
+  background: linear-gradient(90deg, #4895ef, #4361ee);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+}
 
 
 
@@ -455,33 +479,6 @@ footer img {
   transform: translateY(-2px);
   box-shadow: 0 0 12px rgba(124, 242, 199, 0.5);
 }
-
-.cv-dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.cv-download-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: linear-gradient(90deg, #4cc9f0, #4895ef);
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-  padding: 12px 22px;
-  border-radius: 10px;
-  transition: all 0.25s ease;
-  border: none;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-}
-
-.cv-download-button:hover {
-  background: linear-gradient(90deg, #4895ef, #4361ee);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.3);
-}
-
 footer img {
   transition: transform 0.3s ease, filter 0.3s ease;
 }
