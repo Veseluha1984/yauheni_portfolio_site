@@ -80,6 +80,7 @@
      
     </div>
   </div>
+</header>
   <section id="skills">
   <h2>Kernkompetenzen</h2>
   <div class="skills">
@@ -575,18 +576,26 @@ document.getElementById('scrollToTopBtn').onclick = function() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
- const cvToggle = document.getElementById("cvToggle");
+  const cvToggle = document.getElementById("cvToggle");
   const cvMenu = document.getElementById("cvMenu");
 
-  cvToggle.addEventListener("click", () => {
-    cvMenu.classList.toggle("show");
-  });
+  // Защитные проверки: только если элементы существуют
+  if (cvToggle && cvMenu) {
+    cvToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      cvMenu.classList.toggle("show");
+      // Обновляем aria-hidden для доступности
+      const isShown = cvMenu.classList.contains('show');
+      cvMenu.setAttribute('aria-hidden', (!isShown).toString());
+    });
 
-  document.addEventListener("click", (e) => {
-    if (!cvToggle.contains(e.target) && !cvMenu.contains(e.target)) {
-      cvMenu.classList.remove("show");
-    }
-  });
+    document.addEventListener("click", (e) => {
+      if (!cvToggle.contains(e.target) && !cvMenu.contains(e.target)) {
+        cvMenu.classList.remove("show");
+        cvMenu.setAttribute('aria-hidden', 'true');
+      }
+    });
+  }
 
   // Отслеживание кликов по ссылкам CV для GA4
   document.addEventListener("DOMContentLoaded", function () {
