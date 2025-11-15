@@ -69,18 +69,11 @@
       <a class="chip" target="_blank" href="https://www.linkedin.com/in/yauheni-vesialukha-19162b239" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
     </div>
   </div>
-<div class="cv-dropdown">
-  <button class="btn primary" id="cvToggle">
-    <i class="fa-solid fa-file-arrow-down"></i> Lebenslauf herunterladen ▾
-  </button>
-  <div class="cv-menu" id="cvMenu">
-    <a href="files/Yauheni_Vesialukha_Data_Analyst_Tipps_von_Vanessa.pdf" download data-lang="Deutsch">🇩🇪 Deutsch</a>
-    <a href="files/Yauheni_Vesialukha_Data_Analyst_en.pdf" download data-lang="English">🇬🇧 English</a>
-  </div>
-</div>
+  <a class="btn primary cv-download-button" href="files/Yauheni_Vesialukha_Data_PV_Energy Analyst.pdf" download>
+    <i class="fa-solid fa-file-arrow-down"></i> Lebenslauf herunterladen
+  </a>
 </header>
-
-<section id="skills">
+  <section id="skills">
   <h2>Kernkompetenzen</h2>
   <div class="skills">
 
@@ -270,6 +263,28 @@
   </div>
 </div>
 
+<div class="project-card important">
+  <a href="https://github.com/Veseluha1984/saas-revenue-metrics-analysis" target="_blank" rel="noopener">
+    <img src="img/8.png" alt="SaaS Revenue Metrics Dashboard (SQL + Tableau)" loading="lazy">
+  </a>
+  <div class="project-info">
+    <h3>
+      <a href="https://github.com/Veseluha1984/saas-revenue-metrics-analysis" target="_blank" rel="noopener">
+        SaaS Revenue Metrics Dashboard (SQL + Tableau)
+      </a>
+    </h3>
+
+    <p>End-to-end analytics pipeline built with PostgreSQL and Tableau: MRR trends, ARPPU, churn, 
+       expansion/contraction MRR, and user-segment monetization.  
+       Includes SQL data modeling, segmentation, and a fully interactive BI dashboard.</p>
+
+    <p><strong>👉 Business Value:</strong> The analysis highlights key growth drivers: 
+       the <strong>language = 'uk'</strong> group (especially ages <strong>18–24</strong>) shows the 
+       highest ARPPU and is the most profitable user segment, while 
+       <strong>language = 'uk'</strong> ages <strong>25–34</strong> demonstrate the highest churn rate.  
+       These insights support targeted retention strategy, pricing optimization, and more accurate revenue planning.</p>
+  </div>
+</div>
 
   </div>
 </section>
@@ -308,26 +323,32 @@
     <p>04.2022–06.2022 • Übersiedlung aufgrund der Situation in der Ukraine</p>
   </div>
 
-  <div class="experience-item important">
-    <h3>Regionaler Sicherheitsmanager — DIYESA GmbH (UA)</h3>
+  <div class="experience-item important cert-popup-parent">
+    <h3>Regionaler Manager für Risiko- und Prozessmanagement — DIYESA GmbH (UA)</h3>
     <p>11.2019–06.2022 • Einzelhandel mit Elektronik (300 Mitarbeitende)</p>
     <ul>
       <li>Optimierung von Geschäftsprozessen in Logistik, Sicherheit und Inventur.</li>
       <li>Einführung von Automatisierungen und ERP-Systemverbesserungen zur Effizienzsteigerung.</li>
       <li>Führung von Teams mit Fokus auf Produktivität und Standardkonformität.</li>
     </ul>
+    <div class="cert-popup">
+      <img src="files/Arbeitzeugnisse_3.jpg" alt="Regionaler Manager für Risiko- und Prozessmanagement — DIYESA GmbH (UA)" loading="lazy">
+    </div>
   </div>
 
-  <div class="experience-item important">
+  <div class="experience-item important cert-popup-parent">
     <h3>Sicherheitsmitarbeiter / Stellv. Leiter — PrivatBank (UA)</h3>
     <p>11.2014–11.2019 • Bankwesen und Geldtransporte (50 Mitarbeitende)</p>
     <ul>
       <li>Verantwortlich für die Sicherheit von Filialen, Mitarbeitenden und Geldtransporten.</li>
       <li>Routenplanung, Risikominimierung und Vorfallanalyse.</li>
     </ul>
+    <div class="cert-popup">
+      <img src="files/Arbeitzeugnisse_4.jpg" alt="Sicherheitsmitarbeiter / Stellv. Leiter — PrivatBank (UA)" loading="lazy">
+    </div>
   </div>
 
-  <div class="experience-item important">
+  <div class="experience-item">
     <h3>Filialleiter und Sicherheitsmanager — Kalinovskiy Markt GmbH (UA)</h3>
     <p>11.2012–11.2014 • Lebensmitteleinzelhandel (50 Mitarbeitende)</p>
     <ul>
@@ -575,18 +596,26 @@ document.getElementById('scrollToTopBtn').onclick = function() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
- const cvToggle = document.getElementById("cvToggle");
+  const cvToggle = document.getElementById("cvToggle");
   const cvMenu = document.getElementById("cvMenu");
 
-  cvToggle.addEventListener("click", () => {
-    cvMenu.classList.toggle("show");
-  });
+  // Защитные проверки: только если элементы существуют
+  if (cvToggle && cvMenu) {
+    cvToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      cvMenu.classList.toggle("show");
+      // Обновляем aria-hidden для доступности
+      const isShown = cvMenu.classList.contains('show');
+      cvMenu.setAttribute('aria-hidden', (!isShown).toString());
+    });
 
-  document.addEventListener("click", (e) => {
-    if (!cvToggle.contains(e.target) && !cvMenu.contains(e.target)) {
-      cvMenu.classList.remove("show");
-    }
-  });
+    document.addEventListener("click", (e) => {
+      if (!cvToggle.contains(e.target) && !cvMenu.contains(e.target)) {
+        cvMenu.classList.remove("show");
+        cvMenu.setAttribute('aria-hidden', 'true');
+      }
+    });
+  }
 
   // Отслеживание кликов по ссылкам CV для GA4
   document.addEventListener("DOMContentLoaded", function () {
@@ -605,6 +634,78 @@ document.getElementById('scrollToTopBtn').onclick = function() {
     });
   });
 
+// ===== ГЛОБАЛЬНОЕ ОТСЛЕЖИВАНИЕ КЛИКОВ ДЛЯ GA4 =====
+document.addEventListener('click', function (e) {
+  // Ищем "осмысленный" элемент под кликом
+  const target = e.target.closest(
+    'a, button, .skill-tile, .project-card, .experience-item, .education-item, .skill-card, .cv-download-button, .chip, .location-chip'
+  );
+
+  if (!target) return;
+
+  // Базовая информация об элементе
+  const tagName = (target.tagName || '').toLowerCase();
+  const text    = ((target.innerText || target.getAttribute('aria-label') || '').trim()).slice(0, 100);
+  const id      = target.id || '';
+  const classes = (target.className || '').toString().slice(0, 150);
+  const href    = target.href || '';
+
+  // Определяем секцию страницы
+  const sectionEl = target.closest('section, header, footer');
+  let sectionName = 'page';
+  if (sectionEl) {
+    if (sectionEl.id) {
+      sectionName = sectionEl.id;          // например: skills, projects, experience, education, certificates, hobbies
+    } else {
+      sectionName = sectionEl.tagName.toLowerCase(); // header / footer
+    }
+  }
+
+  // Тип элемента (для удобной сегментации в отчётах)
+  let elementType = 'other';
+  if (target.classList.contains('cv-download-button')) {
+    elementType = 'cv_download_button';
+  } else if (target.classList.contains('skill-tile')) {
+    elementType = 'skill_tile';
+  } else if (target.classList.contains('project-card')) {
+    elementType = 'project_card';
+  } else if (target.classList.contains('experience-item')) {
+    elementType = 'experience_item';
+  } else if (target.classList.contains('education-item')) {
+    elementType = 'education_item';
+  } else if (target.classList.contains('skill-card')) {
+    elementType = 'hobby_card';
+  } else if (tagName === 'a') {
+    elementType = 'link';
+  } else if (tagName === 'button') {
+    elementType = 'button';
+  }
+
+  // Определяем, внешний ли это клик
+  let isOutbound = false;
+  if (href && href.startsWith('http')) {
+    try {
+      const linkHost = new URL(href).hostname;
+      const currentHost = window.location.hostname;
+      isOutbound = linkHost !== currentHost;
+    } catch (err) {
+      isOutbound = false;
+    }
+  }
+
+  // Отправляем событие в GA4 (если gtag загружен)
+  if (typeof gtag === 'function') {
+    gtag('event', 'site_click', {
+      section: sectionName,      // блок страницы: header, skills, projects, experience, education, certificates, hobbies, footer
+      element_type: elementType, // тип: project_card, skill_tile, link, button и т.д.
+      element_text: text,        // видимый текст элемента
+      element_id: id,            // id, если есть
+      element_classes: classes,  // классы элемента
+      link_url: href,            // адрес ссылки, если это <a>
+      is_outbound: isOutbound    // true/false — внешний клик или нет
+    });
+  }
+});
 
 </script>
 </body>
