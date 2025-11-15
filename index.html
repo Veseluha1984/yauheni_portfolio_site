@@ -634,6 +634,78 @@ document.getElementById('scrollToTopBtn').onclick = function() {
     });
   });
 
+// ===== ГЛОБАЛЬНОЕ ОТСЛЕЖИВАНИЕ КЛИКОВ ДЛЯ GA4 =====
+document.addEventListener('click', function (e) {
+  // Ищем "осмысленный" элемент под кликом
+  const target = e.target.closest(
+    'a, button, .skill-tile, .project-card, .experience-item, .education-item, .skill-card, .cv-download-button, .chip, .location-chip'
+  );
+
+  if (!target) return;
+
+  // Базовая информация об элементе
+  const tagName = (target.tagName || '').toLowerCase();
+  const text    = ((target.innerText || target.getAttribute('aria-label') || '').trim()).slice(0, 100);
+  const id      = target.id || '';
+  const classes = (target.className || '').toString().slice(0, 150);
+  const href    = target.href || '';
+
+  // Определяем секцию страницы
+  const sectionEl = target.closest('section, header, footer');
+  let sectionName = 'page';
+  if (sectionEl) {
+    if (sectionEl.id) {
+      sectionName = sectionEl.id;          // например: skills, projects, experience, education, certificates, hobbies
+    } else {
+      sectionName = sectionEl.tagName.toLowerCase(); // header / footer
+    }
+  }
+
+  // Тип элемента (для удобной сегментации в отчётах)
+  let elementType = 'other';
+  if (target.classList.contains('cv-download-button')) {
+    elementType = 'cv_download_button';
+  } else if (target.classList.contains('skill-tile')) {
+    elementType = 'skill_tile';
+  } else if (target.classList.contains('project-card')) {
+    elementType = 'project_card';
+  } else if (target.classList.contains('experience-item')) {
+    elementType = 'experience_item';
+  } else if (target.classList.contains('education-item')) {
+    elementType = 'education_item';
+  } else if (target.classList.contains('skill-card')) {
+    elementType = 'hobby_card';
+  } else if (tagName === 'a') {
+    elementType = 'link';
+  } else if (tagName === 'button') {
+    elementType = 'button';
+  }
+
+  // Определяем, внешний ли это клик
+  let isOutbound = false;
+  if (href && href.startsWith('http')) {
+    try {
+      const linkHost = new URL(href).hostname;
+      const currentHost = window.location.hostname;
+      isOutbound = linkHost !== currentHost;
+    } catch (err) {
+      isOutbound = false;
+    }
+  }
+
+  // Отправляем событие в GA4 (если gtag загружен)
+  if (typeof gtag === 'function') {
+    gtag('event', 'site_click', {
+      section: sectionName,      // блок страницы: header, skills, projects, experience, education, certificates, hobbies, footer
+      element_type: elementType, // тип: project_card, skill_tile, link, button и т.д.
+      element_text: text,        // видимый текст элемента
+      element_id: id,            // id, если есть
+      element_classes: classes,  // классы элемента
+      link_url: href,            // адрес ссылки, если это <a>
+      is_outbound: isOutbound    // true/false — внешний клик или нет
+    });
+  }
+});
 
 </script>
 </body>
