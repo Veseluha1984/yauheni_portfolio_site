@@ -555,11 +555,12 @@ footer img:hover {
 }
 
 .cert-popup {
-  width: 420px;
-  height: 580px;
+  width: min(45vw, 520px);  /* растём по ширине окна, но не больше 520px */
+  height: auto;             /* высота считается автоматически по пропорциям */
   max-width: 98vw;
   max-height: 90vh;
 }
+
 
 .cert-popup-horizontal {
   width: 580px;
@@ -571,12 +572,13 @@ footer img:hover {
 .cert-popup img,
 .cert-popup-horizontal img {
   width: 100%;
-  height: 100%;
+  height: auto;            /* вместо фиксированной высоты */
   object-fit: contain;
   background: #fff;
   border: none;
   display: block;
 }
+
 
 .cert-popup-parent.active .cert-popup,
 .cert-popup-parent.active .cert-popup-horizontal {
