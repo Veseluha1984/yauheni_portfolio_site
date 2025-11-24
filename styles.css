@@ -44,9 +44,9 @@ a:hover {
 /* ---------- HERO ---------- */
 .hero {
   display: grid;
-  grid-template-columns: 120px minmax(0, 1fr) auto;
+  grid-template-columns: 120px 1fr auto;
   gap: 18px;
-  align-items: flex-start;            /* всё выравниваем по верху */
+  align-items: center;
   background: linear-gradient(180deg, #0e1730, #0b152b);
   border: 1px solid var(--border);
   border-radius: 20px;
@@ -54,53 +54,26 @@ a:hover {
   box-shadow: var(--shadow);
   margin-bottom: 26px;
 }
-
-.hero-main {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 16px;
+  background: #0e1831 url('img/FOTOSUPERNEW.JPG') center/cover no-repeat;
+  border: 1px solid #27406d;
 }
-
 .h-name {
   margin: 0;
   font-size: 30px;
 }
-
 .h-tag {
-  margin: 0;
+  margin: 6px 0 10px;
   color: var(--muted);
-}
-
-/* Кнопка CV — наверху, справа */
-.cv-download-button {
-  align-self: flex-start;              /* прижимает к верхнему краю колонки */
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: linear-gradient(90deg, #4cc9f0, #4895ef);
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-  padding: 12px 22px;
-  border-radius: 10px;
-  transition: all 0.25s ease;
-  border: none;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-  margin-top: 4px;                     /* маленький отступ от верхнего края */
-}
-
-.cv-download-button:hover {
-  background: linear-gradient(90deg, #4895ef, #4361ee);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.3);
 }
 .h-contacts {
   display: flex;
-  flex-wrap: wrap;
   gap: 14px;
-  width: 100%;            /* чтобы было место для всех chip-кнопок в строке */
+  flex-wrap: wrap;
 }
-
 
 /* ---------- CHIP ---------- */
 .chip {
@@ -624,24 +597,6 @@ footer img:hover {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-
-@media (max-width: 768px) {
-  .hero {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
-  }
-
-  .avatar {
-    margin: 0 auto;
-  }
-
-  .cv-download-button {
-    justify-self: stretch;
-    width: 100%;
-    text-align: center;
-  }
-}
-
 
 @media (max-width: 680px) {
   .hero {
