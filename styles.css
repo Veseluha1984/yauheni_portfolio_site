@@ -55,8 +55,8 @@ a:hover {
   margin-bottom: 26px;
 }
 .avatar {
-  width: 150px;
-  height: 150px;
+  width: 110px;
+  height: 110px;
   border-radius: 16px;
   background: #0e1831 url('img/FOTOSUPERNEW.JPG') center/cover no-repeat;
   border: 1px solid #27406d;
@@ -145,7 +145,7 @@ a:hover {
   background: linear-gradient(90deg, #4cc9f0, #4895ef);
   color: white;
   text-decoration: none;
-  font-weight: 200;
+  font-weight: 600;
   padding: 12px 22px;
   border-radius: 10px;
   transition: all 0.25s ease;
