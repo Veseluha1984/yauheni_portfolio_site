@@ -600,44 +600,28 @@ document.getElementById('scrollToTopBtn').onclick = function() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
-  const cvToggle = document.getElementById("cvToggle");
-  const cvMenu = document.getElementById("cvMenu");
+// Отслеживание скачивания CV (одна кнопка, язык Deutsch)
+document.addEventListener("DOMContentLoaded", function () {
+  const cvButton = document.querySelector(".cv-download-button");
+  if (!cvButton) return;
 
-  // Защитные проверки: только если элементы существуют
-  if (cvToggle && cvMenu) {
-    cvToggle.addEventListener("click", (e) => {
-      e.stopPropagation();
-      cvMenu.classList.toggle("show");
-      // Обновляем aria-hidden для доступности
-      const isShown = cvMenu.classList.contains('show');
-      cvMenu.setAttribute('aria-hidden', (!isShown).toString());
-    });
+  cvButton.addEventListener("click", function (event) {
+    event.preventDefault();
 
-    document.addEventListener("click", (e) => {
-      if (!cvToggle.contains(e.target) && !cvMenu.contains(e.target)) {
-        cvMenu.classList.remove("show");
-        cvMenu.setAttribute('aria-hidden', 'true');
-      }
-    });
-  }
-
-  // Отслеживание кликов по ссылкам CV для GA4
-  document.addEventListener("DOMContentLoaded", function () {
-    const cvLinks = document.querySelectorAll("#cvMenu a");
-
-    cvLinks.forEach(link => {
-      link.addEventListener("click", () => {
-        // Определяем язык по тексту ссылки
-        let lang = link.textContent.includes("Deutsch") ? "Deutsch" : "English";
-
-        // Отправляем событие в GA4
-        gtag("event", "cv_download", {
-          cv_language: lang
-        });
+    if (typeof gtag === "function") {
+      gtag("event", "cv_download", {
+        cv_language: "Deutsch"
       });
-    });
-  });
+    }
 
+    // даем GA4 время отправить событие
+    setTimeout(() => {
+      window.location.href = cvButton.href;
+    }, 400);
+  });
+});
+
+  
 // ===== ГЛОБАЛЬНОЕ ОТСЛЕЖИВАНИЕ КЛИКОВ ДЛЯ GA4 =====
 document.addEventListener('click', function (e) {
   // Ищем "осмысленный" элемент под кликом
