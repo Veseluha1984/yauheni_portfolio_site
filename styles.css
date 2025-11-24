@@ -555,11 +555,34 @@ footer img:hover {
 }
 
 .cert-popup {
-  width: min(45vw, 520px);  /* растём по ширине окна, но не больше 520px */
-  height: auto;             /* высота считается автоматически по пропорциям */
+  width: min(45vw, 520px);
   max-width: 98vw;
-  max-height: 90vh;
+
+  max-height: 90vh;     /* ограничиваем высоту по окну */
+  height: auto;
+
+  overflow-y: auto;     /* <-- главное! */
+  overflow-x: hidden;
+
+  background: #222;
+  border: 2px solid #00bfff;
+  border-radius: 12px;
+  box-shadow: 0 16px 48px rgba(101,214,255,0.25), 0 8px 32px rgba(0,0,0,0.35);
+
+  position: absolute;
+  bottom: 40%;
+  left: 70%;
+  transform: translateX(-50%) scale(1);
+  opacity: 0;
+  pointer-events: none;
 }
+
+.cert-popup img {
+  width: 100%;
+  height: auto;        /* сохраняем пропорции изображения */
+  display: block;
+}
+
 
 
 .cert-popup-horizontal {
