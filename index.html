@@ -448,7 +448,7 @@
 </div>
 
 
-<div class="education-item ">
+<div class="education-item important cert-popup-parent">
   <h3>Datenanalyst-Ausbildung — GoIT (Online)</h3>
   <p>Fünfmonatiger Online-Kurs &nbsp;&nbsp;•&nbsp;&nbsp; Voraussichtlicher Abschluss: <strong>10.2025</strong></p>
   <ul>
@@ -464,7 +464,7 @@
       </a>
     </h3>
     <p>07.2025</p>
-    <div class="cert-popup">
+        <div class="cert-popup">
       <img src="files/Zertifikate_1.jpg" alt="Deutsch B2 Zertifikat" loading="lazy">
     </div>
   </div>
@@ -560,17 +560,17 @@
 
 <script>
 // filepath: c:\Users\User\OneDrive\Рабочий стол\Projects\yauheni_portfolio_site\index.html
-document.querySelectorAll('.cert-popup-parent').forEach(function(parent) {
-  parent.addEventListener('click', function(e) {
-    // Закрыть другие открытые сертификаты
-    document.querySelectorAll('.cert-popup-parent.active').forEach(function(opened) {
-      if (opened !== parent) opened.classList.remove('active');
+document.querySelectorAll('.cert-popup-parent').forEach(parent => {
+    parent.addEventListener('click', (event) => {
+      // Если кликнули по ссылке (или внутри ссылки) – даём ссылке работать, ничего не трогаем
+      if (event.target.closest('a')) {
+        return;
+      }
+
+      // Иначе – переключаем показ сертификата
+      parent.classList.toggle('active');
     });
-    // Переключить текущий
-    parent.classList.toggle('active');
-    e.stopPropagation();
   });
-});
 
 // Закрытие по клику вне сертификата
 document.addEventListener('click', function() {
