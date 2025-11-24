@@ -590,36 +590,36 @@ document.addEventListener('click', function() {
     });
   }
 });
-document.addEventListener('keydown', function(e){
-  if(e.key === 'Escape'){
-    document.querySelectorAll('.cert-popup-parent.active').forEach(el => el.classList.remove('active'));
-  }
-});
-
-document.getElementById('scrollToTopBtn').onclick = function() {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
 // Отслеживание скачивания CV (одна кнопка, язык Deutsch)
 document.addEventListener("DOMContentLoaded", function () {
   const cvButton = document.querySelector(".cv-download-button");
   if (!cvButton) return;
 
   cvButton.addEventListener("click", function (event) {
-    event.preventDefault();
+    event.preventDefault(); // не даём браузеру сразу перейти по ссылке
 
+    const href = cvButton.href;
+    const downloadAttr = cvButton.getAttribute("download") || "";
+
+    // 1. Отправляем событие в GA4
     if (typeof gtag === "function") {
       gtag("event", "cv_download", {
         cv_language: "Deutsch"
       });
     }
 
-    // даем GA4 время отправить событие
+    // 2. Даем немного времени GA4, затем принудительно скачиваем файл
     setTimeout(() => {
-      window.location.href = cvButton.href;
+      const tempLink = document.createElement("a");
+      tempLink.href = href;
+      tempLink.setAttribute("download", downloadAttr);
+      document.body.appendChild(tempLink);
+      tempLink.click();
+      document.body.removeChild(tempLink);
     }, 400);
   });
 });
+
 
   
 // ===== ГЛОБАЛЬНОЕ ОТСЛЕЖИВАНИЕ КЛИКОВ ДЛЯ GA4 =====
