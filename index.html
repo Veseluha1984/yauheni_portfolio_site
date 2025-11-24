@@ -560,17 +560,17 @@
 
 <script>
 // filepath: c:\Users\User\OneDrive\Рабочий стол\Projects\yauheni_portfolio_site\index.html
-document.querySelectorAll('.cert-popup-parent').forEach(parent => {
-    parent.addEventListener('click', (event) => {
-      // Если кликнули по ссылке (или внутри ссылки) – даём ссылке работать, ничего не трогаем
-      if (event.target.closest('a')) {
-        return;
-      }
-
-      // Иначе – переключаем показ сертификата
-      parent.classList.toggle('active');
+document.querySelectorAll('.cert-popup-parent').forEach(function(parent) {
+  parent.addEventListener('click', function(e) {
+    // Закрыть другие открытые сертификаты
+    document.querySelectorAll('.cert-popup-parent.active').forEach(function(opened) {
+      if (opened !== parent) opened.classList.remove('active');
     });
+    // Переключить текущий
+    parent.classList.toggle('active');
+    e.stopPropagation();
   });
+});
 
 // Закрытие по клику вне сертификата
 document.addEventListener('click', function() {
