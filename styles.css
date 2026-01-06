@@ -401,17 +401,26 @@ h2 {
   padding: 40px 20px;
 }
 
+/* Сделать секцию хобби одной строкой на широких экранах (всего 5 карточек) и
+   соответствовать ширине других секций */
+#hobbies {
+  max-width: 1240px; /* согласовать с .projects-section */
+  padding: 40px 20px;
+}
+
 #hobbies .skills-grid {
   display: grid;
-  /* На десктопе — фиксированное число колонок, чтобы элементы не «один уехал» на новую строку */
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(5, 1fr); /* одна строка из 5 карточек на широких экранах */
+  gap: 18px;
   align-items: start;
-  max-width: 1200px; /* соответствие контейнеру .wrap */
+  width: 100%;
   margin: 0 auto;
 }
 
-/* Адаптивные точки перехода: 4 → 3 → 2 → 1 колонки */
+/* Адаптивные точки перехода: 5 → 4 → 3 → 2 → 1 колонки */
+@media (max-width: 1300px) {
+  #hobbies .skills-grid { grid-template-columns: repeat(4, 1fr); }
+}
 @media (max-width: 1100px) {
   #hobbies .skills-grid { grid-template-columns: repeat(3, 1fr); }
 }
