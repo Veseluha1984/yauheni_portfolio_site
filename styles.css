@@ -394,6 +394,27 @@ h2 {
   padding: 40px 0;
 }
 
+/* Сделать блок хобби по ширине согласованным с другими секциями
+   и сделать сетку адаптивной, чтобы карточки растягивались равномерно */
+#hobbies {
+  max-width: 1240px; /* согласовать с .projects-section */
+  padding: 40px 20px;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+/* Карточки внутри хобби должны быть гибкими по ширине */
+#hobbies .skill-card {
+  width: auto; /* убрать фиксированную ширину */
+  min-height: 100px;
+  padding: 12px;
+}
+
 
 #hobbies h2 {
   color: var(--text);
