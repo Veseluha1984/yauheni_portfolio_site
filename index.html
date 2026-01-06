@@ -553,7 +553,7 @@
 
 </div>
 
-<button id="scrollToTopBtn" title="Nach oben">
+<button id="scrollToTopBtn" title="Nach oben" aria-label="Nach oben">
   <i class="fa-solid fa-arrow-up"></i>
   <span class="scroll-btn-label">Nach oben</span>
 </button>
@@ -571,6 +571,41 @@ document.querySelectorAll('.cert-popup-parent').forEach(function(parent) {
     e.stopPropagation();
   });
 });
+
+
+// Обработчик и видимость для кнопки "Nach oben"
+(function(){
+  const scrollBtn = document.getElementById('scrollToTopBtn');
+  if (!scrollBtn) return;
+
+  // Изначально скрываем кнопку, покажем при прокрутке
+  scrollBtn.style.opacity = '0';
+  scrollBtn.style.pointerEvents = 'none';
+
+  const toggleVisibility = () => {
+    if (window.scrollY > 200) {
+      scrollBtn.style.opacity = '1';
+      scrollBtn.style.pointerEvents = 'auto';
+    } else {
+      scrollBtn.style.opacity = '0';
+      scrollBtn.style.pointerEvents = 'none';
+    }
+  };
+
+  window.addEventListener('scroll', toggleVisibility, { passive: true });
+  // Нажатие — прокрутка наверх
+  scrollBtn.addEventListener('click', function(e){
+    e.preventDefault();
+    try {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    } catch (err) {
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }
+  });
+})();
 
 // Закрытие по клику вне сертификата
 document.addEventListener('click', function() {
