@@ -403,11 +403,23 @@ h2 {
 
 #hobbies .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(208px, 1fr)); /* вернуть прежнюю минимальную ширину карточки */
+  /* На десктопе — фиксированное число колонок, чтобы элементы не «один уехал» на новую строку */
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   align-items: start;
   max-width: 1200px; /* соответствие контейнеру .wrap */
   margin: 0 auto;
+}
+
+/* Адаптивные точки перехода: 4 → 3 → 2 → 1 колонки */
+@media (max-width: 1100px) {
+  #hobbies .skills-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 800px) {
+  #hobbies .skills-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  #hobbies .skills-grid { grid-template-columns: 1fr; }
 }
 
 /* Карточки внутри хобби должны быть гибкими по ширине */
