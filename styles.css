@@ -401,18 +401,23 @@ h2 {
   padding: 40px 20px;
 }
 
-.skills-grid {
+#hobbies .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(208px, 1fr)); /* вернуть прежнюю минимальную ширину карточки */
+  gap: 20px;
   align-items: start;
+  max-width: 1200px; /* соответствие контейнеру .wrap */
+  margin: 0 auto;
 }
 
 /* Карточки внутри хобби должны быть гибкими по ширине */
 #hobbies .skill-card {
-  width: auto; /* убрать фиксированную ширину */
+  width: 100%;
   min-height: 100px;
   padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 
