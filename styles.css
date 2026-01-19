@@ -201,36 +201,49 @@ h2 {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background: var(--card2);
-  border: 1px solid var(--border);
+
+  /* без постоянного фона */
+  background: transparent;
+  border: none;
+  box-shadow: none;
+
   border-radius: 12px;
   padding: 16px 12px;
-  box-shadow: var(--shadow);
-  transition: transform 0.2s ease, background 0.2s ease;
+
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
   cursor: pointer;
 }
+
 .skill-tile:hover {
   transform: translateY(-4px);
   background: linear-gradient(90deg, rgba(101,214,255,.07), rgba(124,242,199,.07));
-  box-shadow: var(--shadow);
   cursor: default;
-  filter: brightness(1.1);
+  filter: none;
 }
-.skill-tile img {
+
+/* SVG (inline) вместо IMG */
+.skill-tile svg {
   width: 50px;
   height: 50px;
   margin-bottom: 6px;
-  filter: brightness(1.4);
+
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.75;
 }
+
+/* подпись */
 .skill-tile span {
   font-size: 14px;
   color: var(--text);
   z-index: 1;
 }
+
+/* акцентные (Core) — без фона, только выделение цветом */
 .skill-tile.important {
-  border: 1px solid var(--accent);
-  background: linear-gradient(90deg, rgba(101,214,255,.12), rgba(124,242,199,.12));
+  color: var(--accent);
 }
+
 
 /* ---------- PROJECTS ---------- */
 #projects {
