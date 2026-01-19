@@ -222,6 +222,14 @@ h2 {
   margin-bottom: 6px;
   filter: brightness(1.4);
 }
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+}
+
+
 .skill-tile span {
   font-size: 14px;
   color: var(--text);
