@@ -279,20 +279,25 @@ html[data-theme="light"] .chip-icon-btn{
 .hero-stats{
   position: absolute;
   right: 14px;
-  bottom: 12px;
+  bottom: 6px;
   display: flex;
-  gap: 8px;
-  padding: 4px 8px;
-  border-radius: 10px;
-  border: 1px solid color-mix(in srgb, var(--border), transparent 10%);
-  background: rgba(7,19,36,0.92);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.28);
+  gap: 0;
+  padding: 0 10px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--border), transparent 5%);
+  background: var(--chip-bg);
+  box-shadow: none;
   align-items: center;
 }
 .stat{
-  padding: 0 6px;
-  min-width: 54px;
-  text-align: right;
+  padding: 0 10px;
+  min-width: 0;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  line-height: 1;
 }
 .stat:first-child{
   padding-left: 0;
@@ -300,11 +305,11 @@ html[data-theme="light"] .chip-icon-btn{
 }
 .stat + .stat{
   border-left: 1px solid color-mix(in srgb, var(--border), transparent 35%);
-  padding-left: 8px;
+  padding-left: 10px;
 }
 .stat-num{
-  display: block;
-  font-size: 15px;
+  display: inline;
+  font-size: 13px;
   font-weight: 800;
   letter-spacing: 0.2px;
   background: linear-gradient(90deg, var(--accent), var(--accent2));
@@ -313,10 +318,10 @@ html[data-theme="light"] .chip-icon-btn{
   color: transparent;
 }
 .stat-label{
-  display: block;
+  display: inline;
   margin-top: 0;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1.1;
 }
