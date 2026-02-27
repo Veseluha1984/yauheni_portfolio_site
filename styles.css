@@ -385,6 +385,8 @@ html[data-theme="light"] .chip-icon-btn{
   transition: all 0.25s ease;
   border: none;
   box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  align-self: flex-start;
+  margin-top: 0;
 }
 
 .cv-download-button:hover {
