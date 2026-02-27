@@ -111,13 +111,13 @@ a:hover {
 /* ---------- HERO ---------- */
 .hero {
   display: grid;
-  grid-template-columns: 120px 1fr auto;
-  gap: 18px;
+  grid-template-columns: 112px minmax(0, 1fr) auto;
+  gap: 20px;
   align-items: center;
   background: linear-gradient(180deg, rgba(16, 26, 51, 0.92), rgba(11, 18, 32, 0.92));
   border: 1px solid var(--border);
   border-radius: 20px;
-  padding: 20px;
+  padding: 22px 24px;
   box-shadow: var(--shadow);
   margin-bottom: 26px;
   position: relative;
@@ -138,20 +138,26 @@ html[data-theme="light"] .hero{
   z-index: -1;
 }
 .avatar {
-  width: 110px;
-  height: 110px;
+  width: 104px;
+  height: 104px;
   border-radius: 16px;
   background: #0e1831 url('img/FOTOSUPERNEW.JPG') center/cover no-repeat;
   border: 1px solid #27406d;
 }
+.hero > div:nth-child(2){
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
 .h-name {
   margin: 0;
-  font-size: 30px;
+  font-size: 32px;
   line-height: 1.15;
   letter-spacing: -0.02em;
 }
 .h-tag {
-  margin: 6px 0 10px;
+  margin: 8px 0 12px;
   color: var(--muted);
   font-size: 14px;
   max-width: 62ch;
@@ -377,17 +383,21 @@ html[data-theme="light"] .chip-icon-btn{
 .cv-download-button {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   background: linear-gradient(90deg, #4cc9f0, #4895ef);
   color: white;
   text-decoration: none;
   font-weight: 600;
-  padding: 12px 22px;
+  padding: 12px 18px;
   border-radius: 10px;
   transition: all 0.25s ease;
   border: none;
   box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-  align-self: flex-start;
+  align-self: center;
+  justify-self: end;
+  min-width: 228px;
+  white-space: nowrap;
   margin-top: 0;
 }
 

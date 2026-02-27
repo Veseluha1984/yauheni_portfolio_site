@@ -85,53 +85,6 @@ function showToast({ title, text, iconClass = "fa-solid fa-check" }, opts = {}) 
   if (ttl > 0) setTimeout(close, ttl);
 }
 
-async function copyToClipboard(text) {
-  const value = String(text || "");
-  if (!value) return false;
-
-  try {
-    if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
-      await navigator.clipboard.writeText(value);
-      return true;
-    }
-  } catch {
-    // fallback below
-  }
-
-  try {
-    const ta = document.createElement("textarea");
-    ta.value = value;
-    ta.setAttribute("readonly", "true");
-    ta.style.position = "fixed";
-    ta.style.left = "-9999px";
-    document.body.appendChild(ta);
-    ta.select();
-    const ok = document.execCommand("copy");
-    document.body.removeChild(ta);
-    return ok;
-  } catch {
-    return false;
-  }
-}
-
-function initCopyButtons() {
-  document.addEventListener("click", async (e) => {
-    const btn = e.target.closest("[data-copy]");
-    if (!(btn instanceof Element)) return;
-    const value = btn.getAttribute("data-copy") || "";
-    if (!value) return;
-    e.preventDefault();
-    e.stopPropagation();
-
-    const ok = await copyToClipboard(value);
-    if (ok) {
-      showToast({ title: "Kopiert", text: value, iconClass: "fa-regular fa-copy" });
-    } else {
-      showToast({ title: "Kopieren nicht möglich", text: "Bitte manuell markieren.", iconClass: "fa-solid fa-triangle-exclamation" }, { ttlMs: 3200 });
-    }
-  });
-}
-
 function inferTagsFromCard(card) {
   const tags = new Set(normalizeTags(card.dataset.tags));
   const text = (card.innerText || "").toLowerCase();
@@ -594,7 +547,6 @@ function initTiltEffects() {
 document.addEventListener("DOMContentLoaded", () => {
   initCursorSpotlight();
   initThemeToggle();
-  initCopyButtons();
   initRevealOnScroll();
 
   initCertificatesPopup();
