@@ -25,6 +25,8 @@ function normalizeTags(raw) {
 
 function initCursorSpotlight() {
   if (prefersReducedMotion()) return;
+  const isFinePointer = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (!isFinePointer) return;
   const root = document.documentElement;
   let raf = 0;
   let last = { x: 0, y: 0 };
@@ -643,9 +645,9 @@ function initTiltEffects() {
       if (!rect) return;
       const px = (last.x - rect.left) / rect.width;
       const py = (last.y - rect.top) / rect.height;
-      const rx = (0.5 - py) * 8;
-      const ry = (px - 0.5) * 10;
-      el.style.transform = `perspective(900px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translateY(-2px)`;
+      const rx = (0.5 - py) * 5;
+      const ry = (px - 0.5) * 6;
+      el.style.transform = `perspective(900px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
     };
 
     el.addEventListener("pointerenter", () => {
