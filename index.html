@@ -47,6 +47,25 @@
 </head>
 <body>
 <div class="wrap">
+
+<nav class="top-nav" aria-label="Navigation">
+  <a class="nav-link" href="#skills">Skills</a>
+  <a class="nav-link" href="#projects">Projekte</a>
+  <a class="nav-link" href="#experience">Erfahrung</a>
+  <a class="nav-link" href="#education">Ausbildung</a>
+  <a class="nav-link" href="#certificates">Zertifikate</a>
+  <a class="nav-link" href="#hobbies">Hobbys</a>
+  <span class="nav-spacer" aria-hidden="true"></span>
+  <button class="nav-btn" id="themeToggle" type="button" aria-label="Theme wechseln">
+    <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
+    <span class="nav-btn-text">Theme</span>
+  </button>
+</nav>
+
+<div class="scroll-progress" aria-hidden="true">
+  <div class="scroll-progress__bar" id="scrollProgressBar"></div>
+</div>
+
 <header class="hero">
   <div class="avatar"></div>
   <div>
@@ -64,13 +83,37 @@
   </div>
 </span>
 
-      <a class="chip" href="tel:+41794460081"><i class="fa-solid fa-phone"></i> +41 79 446 00 81</a>
-      <a class="chip" href="mailto:yauhenivesialukha@icloud.com"><i class="fa-solid fa-envelope"></i> vesialukha@icloud.com</a>
+      <span class="chip-group" aria-label="Telefon">
+        <a class="chip" href="tel:+41794460081"><i class="fa-solid fa-phone"></i> +41 79 446 00 81</a>
+        <button class="chip-icon-btn" type="button" data-copy="+41 79 446 00 81" aria-label="Telefonnummer kopieren" title="Kopieren">
+          <i class="fa-regular fa-copy" aria-hidden="true"></i>
+        </button>
+      </span>
+      <span class="chip-group" aria-label="E-Mail">
+        <a class="chip" href="mailto:yauhenivesialukha@icloud.com"><i class="fa-solid fa-envelope"></i> vesialukha@icloud.com</a>
+        <button class="chip-icon-btn" type="button" data-copy="yauhenivesialukha@icloud.com" aria-label="E-Mail kopieren" title="Kopieren">
+          <i class="fa-regular fa-copy" aria-hidden="true"></i>
+        </button>
+      </span>
       <a class="chip" target="_blank" href="https://www.linkedin.com/in/yauheni-vesialukha-19162b239" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
       <a class="chip" target="_blank" href="https://github.com/Veseluha1984" rel="noopener">
   <i class="fa-brands fa-github"></i> GitHub
 </a>
 
+    </div>
+    <div class="hero-stats" aria-label="Kurzüberblick">
+      <div class="stat">
+        <span class="stat-num" id="statProjects" data-count="0">0</span>
+        <span class="stat-label">Projekte</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num" id="statSkills" data-count="0">0</span>
+        <span class="stat-label">Skills</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num" id="statCerts" data-count="0">0</span>
+        <span class="stat-label">Zertifikate</span>
+      </div>
     </div>
   </div>
   <a class="btn primary cv-download-button" href="files/Yauheni_Vesialukha_CV_Data_Analyst.pdf" download>
@@ -181,9 +224,23 @@
 
 <section id="projects">
   <h2>Projekte</h2>
+  <div class="projects-toolbar" role="toolbar" aria-label="Projektfilter">
+    <div class="projects-filters" role="group" aria-label="Filter">
+      <button class="filter-btn is-active" type="button" data-filter="all">Alle</button>
+      <button class="filter-btn" type="button" data-filter="tableau">Tableau</button>
+      <button class="filter-btn" type="button" data-filter="amplitude">Amplitude</button>
+      <button class="filter-btn" type="button" data-filter="sql">SQL</button>
+      <button class="filter-btn" type="button" data-filter="python">Python</button>
+    </div>
+    <label class="project-search" aria-label="Projekt-Suche">
+      <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+      <input id="projectSearch" type="search" inputmode="search" placeholder="Suche Projekte…" autocomplete="off">
+    </label>
+    <span class="project-count" id="projectCount" aria-live="polite"></span>
+  </div>
   <div class="projects-grid ">
 
- <div class="project-card important">
+ <div class="project-card important" data-tags="tableau">
   <a href="https://public.tableau.com/views/FunnelConversionTimeAnalysisTableau/FunnelConversionTimeAnalysis?:language=de-DE&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" target="_blank" rel="noopener">
     <img src="img/1.png" alt="Funnel Conversion Time Analysis (Tableau)" loading="lazy">
   </a>
@@ -201,7 +258,7 @@
 
 
 
-    <div class="project-card important">
+    <div class="project-card important" data-tags="amplitude">
       <a href="https://app.amplitude.com/analytics/demo/dashboard/n72orz89" target="_blank" rel="noopener">
         <img src="img/2.png" alt="Customer Journey Path Analysis (Amplitude)" loading="lazy">
       </a>
@@ -213,7 +270,7 @@
       </div>
     </div>
 
-    <div class="project-card important ">
+    <div class="project-card important" data-tags="amplitude">
       <a href="https://app.amplitude.com/analytics/demo/dashboard/hhus5rgn" target="_blank" rel="noopener">
         <img src="img/3.png" alt="Customer Retention & Cohort Analysis (Amplitude)" loading="lazy">
       </a>
@@ -225,7 +282,7 @@
       </div>
     </div>
 
-    <div class="project-card important">
+    <div class="project-card important" data-tags="tableau">
       <a href="https://public.tableau.com/views/SalesPerformanceDashboardTableau/Dashboard1?:language=de-DE&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" target="_blank" rel="noopener">
         <img src="img/4.png" alt="Sales Performance Dashboard (Tableau)" loading="lazy">
       </a>
@@ -237,7 +294,7 @@
       </div>
     </div>
 
-    <div class="project-card important">
+    <div class="project-card important" data-tags="sql bigquery ga4">
   <a href="https://console.cloud.google.com/bigquery?ws=!1m7!1m6!12m5!1m3!1smy-project-goit-464619!2sus-central1!3sccb5e8e2-3a43-42c4-9619-e6ac177f4181!2e1" target="_blank" rel="noopener">
     <img src="img/5.png" alt="GA4 Conversion Analysis with BigQuery (SQL)" loading="lazy">
   </a>
@@ -249,7 +306,7 @@
   </div>
     </div>
 
-    <div class="project-card important">
+    <div class="project-card important" data-tags="sheets">
       <a href="https://docs.google.com/spreadsheets/d/193z09kr-Y5Ffi2XhZ8XeqC2LEGyTrdKXE5ebZZOhSe0/edit" target="_blank" rel="noopener">
         <img src="img/6.png" alt="Business Insights Dashboard (Google Sheets)" loading="lazy">
       </a>
@@ -261,7 +318,7 @@
       </div>
     </div>
 
-    <div class="project-card important">
+    <div class="project-card important" data-tags="python abtesting">
   <a href="https://github.com/Veseluha1984/A_B_Test_Result" target="_blank" rel="noopener">
     <img src="img/7.png" alt="A/B Test Results Analysis (Python, Jupyter)" loading="lazy">
   </a>
@@ -280,7 +337,7 @@
   </div>
 </div>
 
-<div class="project-card important">
+<div class="project-card important" data-tags="sql tableau">
   <a href="https://github.com/Veseluha1984/saas-revenue-metrics-analysis" target="_blank" rel="noopener">
     <img src="img/8.png" alt="SaaS Revenue Metrics Dashboard (SQL + Tableau)" loading="lazy">
   </a>
@@ -302,7 +359,7 @@
        These insights support targeted retention strategy, pricing optimization, and more accurate revenue planning.</p>
   </div>
 </div>
-    <div class="project-card important">
+    <div class="project-card important" data-tags="sql databricks">
   <a href="https://github.com/Veseluha1984/swiss-electricity-consumption-trends" target="_blank" rel="noopener">
     <img src="img/dashboard_index_1980_100.png" alt="Swiss Electricity Consumption Trends (Databricks SQL Dashboard)" loading="lazy">
   </a>
@@ -333,7 +390,7 @@
   </div>
 </div>
 
-  <div class="project-card important">
+  <div class="project-card important" data-tags="sql tableau">
   <a href="https://github.com/Veseluha1984/traffic-source-performance-analysis/tree/main/traffic-source-analysis" target="_blank" rel="noopener">
     <img src="img/daschboard.png" alt="Traffic Source Performance & Engagement Analysis (SQL + Tableau)" loading="lazy">
   </a>
@@ -647,178 +704,18 @@
   <span class="scroll-btn-label">Nach oben</span>
 </button>
 
-<script>
-// filepath: c:\Users\User\OneDrive\Рабочий стол\Projects\yauheni_portfolio_site\index.html
-document.querySelectorAll('.cert-popup-parent').forEach(function(parent) {
-  parent.addEventListener('click', function(e) {
-    // Закрыть другие открытые сертификаты
-    document.querySelectorAll('.cert-popup-parent.active').forEach(function(opened) {
-      if (opened !== parent) opened.classList.remove('active');
-    });
-    // Переключить текущий
-    parent.classList.toggle('active');
-    e.stopPropagation();
-  });
-});
+<div class="modal" id="projectModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Projekt Details">
+  <div class="modal__overlay" data-close="true"></div>
+  <div class="modal__content" role="document">
+    <button class="modal__close" type="button" data-close="true" aria-label="Schliessen">
+      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    </button>
+    <div class="modal__body" id="projectModalBody"></div>
+  </div>
+</div>
 
+<div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
 
-// Обработчик и видимость для кнопки "Nach oben"
-(function(){
-  const scrollBtn = document.getElementById('scrollToTopBtn');
-  if (!scrollBtn) return;
-
-  // Изначально скрываем кнопку, покажем при прокрутке
-  scrollBtn.style.opacity = '0';
-  scrollBtn.style.pointerEvents = 'none';
-
-  const toggleVisibility = () => {
-    if (window.scrollY > 200) {
-      scrollBtn.style.opacity = '1';
-      scrollBtn.style.pointerEvents = 'auto';
-    } else {
-      scrollBtn.style.opacity = '0';
-      scrollBtn.style.pointerEvents = 'none';
-    }
-  };
-
-  window.addEventListener('scroll', toggleVisibility, { passive: true });
-  // Нажатие — прокрутка наверх
-  scrollBtn.addEventListener('click', function(e){
-    e.preventDefault();
-    try {
-      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-    } catch (err) {
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-    }
-  });
-})();
-
-// Закрытие по клику вне сертификата
-document.addEventListener('click', function() {
-  document.querySelectorAll('.cert-popup-parent.active').forEach(function(opened) {
-    opened.classList.remove('active');
-  });
-});
-
-// АВТОМАТИЧЕСКОЕ ЗАКРЫТИЕ ПРИ УХОДЕ КУРСОРА НА ДРУГУЮ СЕКЦИЮ
-['#experience', '#education', '#certificates', '#projects', '#hobbies'].forEach(function(selector) {
-  var section = document.querySelector(selector);
-  if (section) {
-    section.addEventListener('mouseenter', function() {
-      document.querySelectorAll('.cert-popup-parent.active').forEach(function(opened) {
-        opened.classList.remove('active');
-      });
-    });
-  }
-});
-// Отслеживание скачивания CV (одна кнопка, язык Deutsch)
-document.addEventListener("DOMContentLoaded", function () {
-  const cvButton = document.querySelector(".cv-download-button");
-  if (!cvButton) return;
-
-  cvButton.addEventListener("click", function (event) {
-    event.preventDefault(); // не даём браузеру сразу перейти по ссылке
-
-    const href = cvButton.href;
-    const downloadAttr = cvButton.getAttribute("download") || "";
-
-    // 1. Отправляем событие в GA4
-    if (typeof gtag === "function") {
-      gtag("event", "cv_download", {
-        cv_language: "Deutsch"
-      });
-    }
-
-    // 2. Даем немного времени GA4, затем принудительно скачиваем файл
-    setTimeout(() => {
-      const tempLink = document.createElement("a");
-      tempLink.href = href;
-      tempLink.setAttribute("download", downloadAttr);
-      document.body.appendChild(tempLink);
-      tempLink.click();
-      document.body.removeChild(tempLink);
-    }, 400);
-  });
-});
-
-
-  
-// ===== ГЛОБАЛЬНОЕ ОТСЛЕЖИВАНИЕ КЛИКОВ ДЛЯ GA4 =====
-document.addEventListener('click', function (e) {
-  // Ищем "осмысленный" элемент под кликом
-  const target = e.target.closest(
-    'a, button, .skill-tile, .project-card, .experience-item, .education-item, .skill-card, .cv-download-button, .chip, .location-chip'
-  );
-
-  if (!target) return;
-
-  // Базовая информация об элементе
-  const tagName = (target.tagName || '').toLowerCase();
-  const text    = ((target.innerText || target.getAttribute('aria-label') || '').trim()).slice(0, 100);
-  const id      = target.id || '';
-  const classes = (target.className || '').toString().slice(0, 150);
-  const href    = target.href || '';
-
-  // Определяем секцию страницы
-  const sectionEl = target.closest('section, header, footer');
-  let sectionName = 'page';
-  if (sectionEl) {
-    if (sectionEl.id) {
-      sectionName = sectionEl.id;          // например: skills, projects, experience, education, certificates, hobbies
-    } else {
-      sectionName = sectionEl.tagName.toLowerCase(); // header / footer
-    }
-  }
-
-  // Тип элемента (для удобной сегментации в отчётах)
-  let elementType = 'other';
-  if (target.classList.contains('cv-download-button')) {
-    elementType = 'cv_download_button';
-  } else if (target.classList.contains('skill-tile')) {
-    elementType = 'skill_tile';
-  } else if (target.classList.contains('project-card')) {
-    elementType = 'project_card';
-  } else if (target.classList.contains('experience-item')) {
-    elementType = 'experience_item';
-  } else if (target.classList.contains('education-item')) {
-    elementType = 'education_item';
-  } else if (target.classList.contains('skill-card')) {
-    elementType = 'hobby_card';
-  } else if (tagName === 'a') {
-    elementType = 'link';
-  } else if (tagName === 'button') {
-    elementType = 'button';
-  }
-
-  // Определяем, внешний ли это клик
-  let isOutbound = false;
-  if (href && href.startsWith('http')) {
-    try {
-      const linkHost = new URL(href).hostname;
-      const currentHost = window.location.hostname;
-      isOutbound = linkHost !== currentHost;
-    } catch (err) {
-      isOutbound = false;
-    }
-  }
-
-  // Отправляем событие в GA4 (если gtag загружен)
-  if (typeof gtag === 'function') {
-    gtag('event', 'site_click', {
-      section: sectionName,      // блок страницы: header, skills, projects, experience, education, certificates, hobbies, footer
-      element_type: elementType, // тип: project_card, skill_tile, link, button и т.д.
-      element_text: text,        // видимый текст элемента
-      element_id: id,            // id, если есть
-      element_classes: classes,  // классы элемента
-      link_url: href,            // адрес ссылки, если это <a>
-      is_outbound: isOutbound    // true/false — внешний клик или нет
-    });
-  }
-});
-
-</script>
+<script defer src="script.js"></script>
 </body>
 </html>
