@@ -160,7 +160,13 @@ html[data-theme="light"] .hero{
   margin: 8px 0 12px;
   color: var(--muted);
   font-size: 14px;
-  max-width: 62ch;
+  max-width: none;
+  white-space: nowrap;
+}
+@media (max-width: 900px){
+  .h-tag{
+    white-space: normal;
+  }
 }
 .h-contacts {
   display: flex;
