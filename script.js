@@ -170,62 +170,6 @@ function initThemeToggle() {
   });
 }
 
-function initNavSmoothScroll() {
-  $all('.top-nav a[href^="#"]').forEach((a) => {
-    a.addEventListener("click", (e) => {
-      const href = a.getAttribute("href");
-      if (!href) return;
-      const target = document.querySelector(href);
-      if (!target) return;
-      e.preventDefault();
-      target.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "start" });
-      history.replaceState(null, "", href);
-    });
-  });
-}
-
-function initScrollSpy() {
-  const links = $all('.top-nav a[href^="#"]');
-  if (!links.length) return;
-
-  const idToLink = new Map(
-    links
-      .map((l) => {
-        const href = l.getAttribute("href") || "";
-        const id = href.startsWith("#") ? href.slice(1) : "";
-        return [id, l];
-      })
-      .filter(([id]) => id)
-  );
-
-  const sections = Array.from(idToLink.keys())
-    .map((id) => document.getElementById(id))
-    .filter(Boolean);
-
-  const setActive = (id) => {
-    links.forEach((l) => l.classList.remove("is-active"));
-    const link = idToLink.get(id);
-    if (link) link.classList.add("is-active");
-  };
-
-  const io = new IntersectionObserver(
-    (entries) => {
-      // pick the most visible entry
-      const visible = entries
-        .filter((e) => e.isIntersecting)
-        .sort((a, b) => (b.intersectionRatio || 0) - (a.intersectionRatio || 0))[0];
-      if (visible && visible.target && visible.target.id) setActive(visible.target.id);
-    },
-    { root: null, threshold: [0.2, 0.35, 0.5], rootMargin: "-20% 0px -65% 0px" }
-  );
-
-  sections.forEach((s) => io.observe(s));
-
-  // initial state
-  const hash = (location.hash || "").replace("#", "");
-  if (hash && idToLink.has(hash)) setActive(hash);
-}
-
 function initRevealOnScroll() {
   const items = $all("header.hero, section, footer");
   if (!items.length) return;
@@ -248,31 +192,6 @@ function initRevealOnScroll() {
     { threshold: 0.12, rootMargin: "0px 0px -10% 0px" }
   );
   items.forEach((el) => io.observe(el));
-}
-
-function initScrollProgress() {
-  const bar = document.getElementById("scrollProgressBar");
-  if (!bar) return;
-
-  let ticking = false;
-  const update = () => {
-    ticking = false;
-    const doc = document.documentElement;
-    const scrollTop = doc.scrollTop || document.body.scrollTop || 0;
-    const max = (doc.scrollHeight || 1) - (doc.clientHeight || 1);
-    const p = max <= 0 ? 0 : clamp(scrollTop / max, 0, 1);
-    bar.style.width = `${(p * 100).toFixed(2)}%`;
-  };
-
-  const onScroll = () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(update);
-  };
-
-  window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", onScroll, { passive: true });
-  update();
 }
 
 function initCertificatesPopup() {
@@ -676,10 +595,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initCursorSpotlight();
   initThemeToggle();
   initCopyButtons();
-  initNavSmoothScroll();
-  initScrollSpy();
   initRevealOnScroll();
-  initScrollProgress();
 
   initCertificatesPopup();
   initScrollToTop();

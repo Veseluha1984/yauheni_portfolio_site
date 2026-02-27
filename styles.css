@@ -98,77 +98,7 @@ a:hover {
   z-index: 1;
 }
 
-/* ---------- TOP NAV ---------- */
-.top-nav{
-  position: sticky;
-  top: 12px;
-  z-index: 3000;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  padding: 8px 10px;
-  border-radius: 12px;
-  background: color-mix(in srgb, var(--nav-bg), transparent 10%);
-  border: 1px solid color-mix(in srgb, var(--border), transparent 15%);
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(var(--nav-blur));
-  -webkit-backdrop-filter: blur(var(--nav-blur));
-  margin-bottom: 14px;
-}
-.top-nav .nav-spacer{ flex: 1; }
-.nav-link{
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 10px;
-  border-radius: 999px;
-  border: 1px solid transparent;
-  color: var(--text);
-  text-decoration: none;
-  font-size: 13px;
-  line-height: 1;
-}
-.nav-link:hover{ text-decoration: none; border-color: var(--border); }
-.nav-link.is-active{
-  border-color: var(--accent);
-  background: linear-gradient(90deg, rgba(101,214,255,.12), rgba(124,242,199,.12));
-}
-.nav-btn{
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--text);
-  cursor: pointer;
-  font-size: 13px;
-}
-.nav-btn:hover{
-  background: linear-gradient(90deg, rgba(101,214,255,.08), rgba(124,242,199,.08));
-}
-@media (max-width: 680px){
-  .top-nav{ top: 0; border-radius: 0 0 16px 16px; margin: -28px -28px 14px; }
-  .nav-btn-text{ display: none; }
-}
-
-.scroll-progress{
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  z-index: 4000;
-  background: transparent;
-}
-.scroll-progress__bar{
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
-  box-shadow: 0 0 14px rgba(101,214,255,0.25);
-}
+/* top navigation & scroll progress intentionally removed */
 
 /* Reveal animations */
 .reveal{ opacity: 0; transform: translateY(10px); transition: opacity 600ms cubic-bezier(.2,.6,.2,1), transform 600ms cubic-bezier(.2,.6,.2,1); }
